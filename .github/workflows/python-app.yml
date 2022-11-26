@@ -14,8 +14,11 @@ permissions:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        os: [ "ubuntu-latest", "windows-latest" ]
 
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
     defaults:
       run:
         working-directory: ./example-app
@@ -43,7 +46,7 @@ jobs:
         
   lint:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
     needs: build
     concurrency:
       group: some-group-name
@@ -71,7 +74,7 @@ jobs:
         
   formatter:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
     needs: build
     concurrency:
       group: some-group-name
@@ -99,7 +102,7 @@ jobs:
         
   security:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
     needs: build
     concurrency:
       group: some-group-name
@@ -127,7 +130,7 @@ jobs:
         
   test:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
     needs: [lint, formatter, security]
     defaults:
       run:
