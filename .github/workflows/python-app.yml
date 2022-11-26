@@ -38,7 +38,7 @@ jobs:
       id: cached-poetry-dependencies
       uses: actions/cache@v3
       with:
-        path: /home/runner/work/<iac-labs/iac-labs>/example-app/.venv
+        path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
         key: ${{ runner.os }}-venv
         
   lint:
@@ -63,11 +63,11 @@ jobs:
       id: cached-poetry-dependencies
       uses: actions/cache@v3
       with:
-        path: /home/runner/work/<iac-labs/iac-labs>/example-app/.venv
+        path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
         key: ${{ runner.os }}-venv
     - name: Lint with flake8
       run: |
-        poetry run task lint
+        source $venv poetry run task lint
         
   formatter:
 
@@ -91,11 +91,11 @@ jobs:
       id: cached-poetry-dependencies
       uses: actions/cache@v3
       with:
-        path: /home/runner/work/<iac-labs/iac-labs>/example-app/.venv
+        path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
         key: ${{ runner.os }}-venv
     - name: Test with formatter
       run: |
-        poetry run task formatter
+        source $venv poetry run task formatter
         
   security:
 
@@ -119,11 +119,11 @@ jobs:
       id: cached-poetry-dependencies
       uses: actions/cache@v3
       with:
-        path: /home/runner/work/<iac-labs/iac-labs>/example-app/.venv
+        path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
         key: ${{ runner.os }}-venv
     - name: Test with pytest
       run: |
-        poetry run task security
+        source $venv poetry run task security
         
   test:
 
@@ -145,10 +145,10 @@ jobs:
       id: cached-poetry-dependencies
       uses: actions/cache@v3
       with:
-        path: /home/runner/work/<iac-labs/iac-labs>/example-app/.venv
+        path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
         key: ${{ runner.os }}-venv
     - name: Test with pytest
       run: |
-        poetry run task test
+        source $venv poetry run task test
 
 
